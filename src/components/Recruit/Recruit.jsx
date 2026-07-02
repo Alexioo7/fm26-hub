@@ -1,10 +1,11 @@
+import { Sprout, Gem, Medal, Ban, Flag, Lightbulb } from 'lucide-react'
 import { PERSONALITIES, TIER_CONFIG } from '../../data/personalities'
 import Badge from '../ui/Badge'
 
 const PROFILES = [
   {
     id: 'youth',
-    icon: '🌱',
+    icon: Sprout,
     label: 'Jeune à potentiel',
     desc: 'Top personnalités pour le développement des newgens et jeunes joueurs',
     filter: p => p.dev >= 75,
@@ -13,7 +14,7 @@ const PROFILES = [
   },
   {
     id: 'pressure',
-    icon: '💎',
+    icon: Gem,
     label: 'Gros matchs',
     desc: 'Joueurs qui performent sous pression — finales, derbies, Ligue des Champions',
     filter: p => p.pres >= 72,
@@ -22,7 +23,7 @@ const PROFILES = [
   },
   {
     id: 'captain',
-    icon: '🏅',
+    icon: Medal,
     label: 'Capitaine',
     desc: 'Meilleur leadership pour mener le vestiaire',
     filter: p => {
@@ -34,7 +35,7 @@ const PROFILES = [
   },
   {
     id: 'avoid',
-    icon: '🚫',
+    icon: Ban,
     label: 'À éviter',
     desc: 'Profils à fuir — mauvais développement ou performances en match catastrophiques',
     filter: p => p.tier === 'D' || (p.dev < 30 && p.pres < 30),
@@ -48,7 +49,9 @@ export default function Recruit() {
     <div>
       {/* Red flags */}
       <div style={{ background: '#2d080899', border: '1px solid #f8514944', borderRadius: 10, padding: '12px 16px', marginBottom: 16 }}>
-        <div style={{ fontWeight: 700, fontSize: 12, color: '#f85149', marginBottom: 8 }}>🚩 Red Flags — Ne jamais signer</div>
+        <div style={{ fontWeight: 700, fontSize: 12, color: '#f85149', marginBottom: 8, display: 'flex', alignItems: 'center', gap: 6 }}>
+          <Flag size={14} strokeWidth={2} aria-hidden="true" /> Red flags — Ne jamais signer
+        </div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
           {[
             { name: 'Friable', reason: 'Pression 1 garanti = fantôme en match' },
@@ -75,9 +78,10 @@ export default function Recruit() {
 
         return (
           <div key={profile.id} style={{ marginBottom: 14 }}>
-            <div style={{ fontWeight: 700, fontSize: 13, color: '#e6edf3', marginBottom: 6 }}>
-              {profile.icon} {profile.label}
-              <span style={{ fontSize: 11, color: '#7d8590', fontWeight: 400, marginLeft: 8 }}>{profile.desc}</span>
+            <div style={{ fontWeight: 700, fontSize: 13, color: '#e6edf3', marginBottom: 6, display: 'flex', alignItems: 'center', gap: 6, flexWrap: 'wrap' }}>
+              <profile.icon size={15} strokeWidth={2} aria-hidden="true" color="#e8b84b" />
+              {profile.label}
+              <span style={{ fontSize: 11, color: '#7d8590', fontWeight: 400 }}>{profile.desc}</span>
             </div>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginBottom: 8 }}>
               {list.map(p => {
@@ -94,8 +98,9 @@ export default function Recruit() {
                 )
               })}
             </div>
-            <div style={{ fontSize: 10, color: '#58a6ff', background: '#0c1a3a', border: '1px solid #1e40af33', borderRadius: 6, padding: '6px 10px' }}>
-              💡 {profile.tip}
+            <div style={{ fontSize: 10, color: '#58a6ff', background: '#0c1a3a', border: '1px solid #1e40af33', borderRadius: 6, padding: '6px 10px', display: 'flex', alignItems: 'flex-start', gap: 6 }}>
+              <Lightbulb size={13} strokeWidth={2} aria-hidden="true" style={{ flexShrink: 0, marginTop: 1 }} />
+              <span>{profile.tip}</span>
             </div>
           </div>
         )

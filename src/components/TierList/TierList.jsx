@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import { PERSONALITIES, TIERS, TIER_CONFIG, ATTRS } from '../../data/personalities'
 import { mediaLabel } from '../../data/mediaStyles'
 import Badge from '../ui/Badge'
@@ -6,6 +7,7 @@ import RingScore from '../ui/RingScore'
 import AttrBar from '../ui/AttrBar'
 import MediaTag from '../ui/MediaTag'
 import Tooltip from '../ui/Tooltip'
+import { AttrIcon } from '../ui/icons'
 
 function norm(s) {
   return s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '')
@@ -59,8 +61,8 @@ function DetailPanel({ p }) {
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '7px 14px', marginBottom: 10 }}>
         {ATTRS.map(a => (
           <div key={a.key}>
-            <div style={{ fontSize: 10, color: '#484f58', marginBottom: 3 }}>
-              {a.icon}{' '}
+            <div style={{ fontSize: 10, color: '#484f58', marginBottom: 3, display: 'flex', alignItems: 'center', gap: 5 }}>
+              <AttrIcon attrKey={a.key} size={12} color="#7d8590" />
               <Tooltip content={a.info}>
                 <span className="has-tip">{a.label}</span>
               </Tooltip>
@@ -138,7 +140,19 @@ function PersonalityCard({ p }) {
           <span style={{ color: '#30363d', fontSize: 12, marginLeft: 4 }} aria-hidden="true">{open ? '▲' : '▼'}</span>
         </div>
       </div>
-      {open && <DetailPanel p={p} />}
+      <AnimatePresence initial={false}>
+        {open && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.2, ease: 'easeOut' }}
+            style={{ overflow: 'hidden' }}
+          >
+            <DetailPanel p={p} />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   )
 }
@@ -153,7 +167,16 @@ function TierSection({ tier, list }) {
           {list.length}
         </span>
       </div>
-      {list.map(p => <PersonalityCard key={p.id} p={p} />)}
+      {list.map((p, i) => (
+        <motion.div
+          key={p.id}
+          initial={{ opacity: 0, y: 6 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.18, delay: Math.min(i * 0.03, 0.25), ease: 'easeOut' }}
+        >
+          <PersonalityCard p={p} />
+        </motion.div>
+      ))}
     </div>
   )
 }

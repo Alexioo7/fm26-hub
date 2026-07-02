@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { PERSONALITIES, ATTRS, TIER_CONFIG } from '../../data/personalities'
 import Badge from '../ui/Badge'
 import Tooltip from '../ui/Tooltip'
+import { AttrIcon } from '../ui/icons'
 
 export default function Compare() {
   const [leftId, setLeftId] = useState('')
@@ -77,8 +78,8 @@ export default function Compare() {
                     <span style={{ fontSize: 10, color: '#484f58', marginLeft: 4 }}>({left.attrs[a.key][0]}–{left.attrs[a.key][1]})</span>
                   </div>
                   <div style={{ textAlign: 'center', padding: '0 10px', minWidth: 110 }}>
-                    <div style={{ fontSize: 9, color: '#484f58' }}>
-                      {a.icon}{' '}
+                    <div style={{ fontSize: 9, color: '#484f58', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 4 }}>
+                      <AttrIcon attrKey={a.key} size={11} color="#7d8590" />
                       <Tooltip content={a.info}><span className="has-tip">{a.label}</span></Tooltip>
                     </div>
                     {lWins && <div style={{ fontSize: 9, color: '#3fb950', marginTop: 2 }}>◄</div>}

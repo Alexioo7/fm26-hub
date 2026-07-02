@@ -2,6 +2,8 @@ import { useState, useMemo } from 'react'
 import { PERSONALITIES, ATTRS, TIER_CONFIG, MEDIA_RANGES } from '../../data/personalities'
 import { MEDIA_STYLES, mediaLabel } from '../../data/mediaStyles'
 import Tooltip from '../ui/Tooltip'
+import { AttrIcon } from '../ui/icons'
+import { FlaskConical, Trophy } from 'lucide-react'
 
 const MEDIA_NAMES = Object.keys(MEDIA_RANGES)
 
@@ -100,12 +102,14 @@ function GradeBadge({ grade, size = 'md' }) {
   )
 }
 
-function AttrRow({ attrKey, label, icon, info, range }) {
+function AttrRow({ attrKey, label, info, range }) {
   const color = getAttrColor(range)
   const pct = range ? Math.round((midpoint(range) / 20) * 100) : 0
   return (
     <div style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '5px 0', borderBottom: '1px solid #21262d33' }}>
-      <span style={{ fontSize: 14, width: 20, textAlign: 'center' }} aria-hidden="true">{icon}</span>
+      <span style={{ width: 20, textAlign: 'center', display: 'flex', justifyContent: 'center' }}>
+        <AttrIcon attrKey={attrKey} size={14} color="#7d8590" />
+      </span>
       <span style={{ fontSize: 11, color: '#7d8590', flex: 1 }}>
         <Tooltip content={info}><span className="has-tip">{label}</span></Tooltip>
       </span>
@@ -192,8 +196,9 @@ export default function ComboAnalyser() {
   return (
     <div style={{ maxWidth: 560, margin: '0 auto' }}>
       <div style={{ background: '#161b22', border: '1px solid #21262d', borderRadius: 12, padding: 20, marginBottom: 12 }}>
-        <h2 style={{ margin: '0 0 16px', fontSize: 15, fontWeight: 700, color: '#e8b84b' }}>
-          🔬 Analyseur de combo
+        <h2 style={{ margin: '0 0 16px', fontSize: 15, fontWeight: 700, color: '#e8b84b', display: 'flex', alignItems: 'center', gap: 8 }}>
+          <FlaskConical size={17} strokeWidth={2} aria-hidden="true" />
+          Analyseur de combo
         </h2>
 
         {/* Inputs */}
@@ -334,7 +339,7 @@ export default function ComboAnalyser() {
           <div style={{ marginBottom: 12 }}>
             <div style={{ fontSize: 10, color: '#484f58', marginBottom: 6 }}>Attributs après croisement perso × style médias</div>
             {ATTRS.map(a => (
-              <AttrRow key={a.key} attrKey={a.key} label={a.label} icon={a.icon} info={a.info} range={combinedAttrs[a.key]} />
+              <AttrRow key={a.key} attrKey={a.key} label={a.label} info={a.info} range={combinedAttrs[a.key]} />
             ))}
           </div>
 
@@ -351,7 +356,10 @@ export default function ComboAnalyser() {
       {/* Top 3 combos */}
       {personality && bestCombos.length > 0 && (
         <div style={{ background: '#161b22', border: '1px solid #21262d', borderRadius: 12, padding: 16 }}>
-          <div style={{ fontSize: 11, color: '#7d8590', marginBottom: 10 }}>🏆 Meilleurs combos pour {personality.name}</div>
+          <div style={{ fontSize: 11, color: '#7d8590', marginBottom: 10, display: 'flex', alignItems: 'center', gap: 6 }}>
+            <Trophy size={13} strokeWidth={2} aria-hidden="true" color="#e8b84b" />
+            Meilleurs combos pour {personality.name}
+          </div>
           {bestCombos.map((c, i) => {
             const cfg = TIER_CONFIG[c.grade]
             const isCurrent = c.media === mediaName

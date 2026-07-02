@@ -15,13 +15,15 @@ export default function Nav({ tabs, active, onChange }) {
       <div style={{ display: 'flex', maxWidth: 900, margin: '0 auto', width: '100%' }}>
         {tabs.map(t => {
           const isActive = active === t.id
+          const Icon = t.icon
           return (
             <button
               key={t.id}
               onClick={() => onChange(t.id)}
               aria-current={isActive ? 'page' : undefined}
               style={{
-                padding: '0 13px',
+                display: 'flex', alignItems: 'center', gap: 6,
+                padding: '0 12px',
                 minHeight: 44,
                 border: 'none',
                 borderBottom: `2px solid ${isActive ? '#e8b84b' : 'transparent'}`,
@@ -35,6 +37,7 @@ export default function Nav({ tabs, active, onChange }) {
                 letterSpacing: '0.01em',
               }}
             >
+              <Icon size={14} strokeWidth={2} aria-hidden="true" style={{ flexShrink: 0 }} />
               {t.label}
             </button>
           )

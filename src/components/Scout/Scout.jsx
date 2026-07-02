@@ -1,11 +1,12 @@
 import { useState } from 'react'
+import { Sprout, Gem, Medal, Ban } from 'lucide-react'
 import { PERSONALITIES, TIER_CONFIG } from '../../data/personalities'
 
 const MODES = [
-  { id: 'youth', icon: '🌱', label: 'Développement', desc: 'Meilleurs pour les jeunes' },
-  { id: 'clutch', icon: '💎', label: 'Gros matchs', desc: 'Performent sous pression' },
-  { id: 'captain', icon: '🏅', label: 'Capitaine', desc: 'Leadership vestiaire' },
-  { id: 'risk', icon: '🚫', label: 'Risques', desc: 'Profils à fuir' },
+  { id: 'youth', icon: Sprout, label: 'Développement', desc: 'Meilleurs pour les jeunes' },
+  { id: 'clutch', icon: Gem, label: 'Gros matchs', desc: 'Performent sous pression' },
+  { id: 'captain', icon: Medal, label: 'Capitaine', desc: 'Leadership vestiaire' },
+  { id: 'risk', icon: Ban, label: 'Risques', desc: 'Profils à fuir' },
 ]
 
 const scoreFns = {
@@ -42,8 +43,10 @@ export default function Scout() {
               borderRadius: 10, padding: '10px 8px', cursor: 'pointer', textAlign: 'center', transition: 'all 0.15s',
             }}
           >
-            <div style={{ fontSize: 20 }}>{m.icon}</div>
-            <div style={{ fontSize: 10, fontWeight: 700, color: mode === m.id ? '#e8b84b' : '#e6edf3', marginTop: 4 }}>{m.label}</div>
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
+              <m.icon size={20} strokeWidth={2} aria-hidden="true" color={mode === m.id ? '#e8b84b' : '#7d8590'} />
+            </div>
+            <div style={{ fontSize: 10, fontWeight: 700, color: mode === m.id ? '#e8b84b' : '#e6edf3', marginTop: 6 }}>{m.label}</div>
             <div style={{ fontSize: 9, color: '#484f58', marginTop: 2 }}>{m.desc}</div>
           </div>
         ))}

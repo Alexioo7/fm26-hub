@@ -3,6 +3,8 @@ import { PERSONALITIES, ATTRS, TIER_CONFIG } from '../../data/personalities'
 import { mediaLabel } from '../../data/mediaStyles'
 import Badge from '../ui/Badge'
 import Tooltip from '../ui/Tooltip'
+import { AttrIcon } from '../ui/icons'
+import { AlertTriangle, CircleCheck, Lightbulb } from 'lucide-react'
 
 const attrByKey = (key) => ATTRS.find(a => a.key === key)
 
@@ -127,8 +129,10 @@ export default function Mentoring() {
                 textAlign: 'center', transition: 'all 0.12s',
               }}
             >
-              <div style={{ fontSize: 18 }}>{n.icon}</div>
-              <div style={{ fontSize: 9, fontWeight: 700, color: isActive ? '#e8b84b' : '#7d8590', marginTop: 3, lineHeight: 1.3 }}>{n.label}</div>
+              <div style={{ display: 'flex', justifyContent: 'center' }}>
+                <AttrIcon attrKey={n.needAttr} size={18} color={isActive ? '#e8b84b' : '#7d8590'} />
+              </div>
+              <div style={{ fontSize: 9, fontWeight: 700, color: isActive ? '#e8b84b' : '#7d8590', marginTop: 5, lineHeight: 1.3 }}>{n.label}</div>
             </div>
           )
         })}
@@ -137,8 +141,9 @@ export default function Mentoring() {
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginBottom: 14 }}>
         {/* Left: qui a besoin d'un mentor */}
         <div style={{ background: '#161b22', border: '1px solid #f8514933', borderRadius: 10, padding: 14 }}>
-          <div style={{ fontWeight: 700, fontSize: 12, color: '#f85149', marginBottom: 10 }}>
-            🚨 Personnalités qui en ont besoin
+          <div style={{ fontWeight: 700, fontSize: 12, color: '#f85149', marginBottom: 10, display: 'flex', alignItems: 'center', gap: 6 }}>
+            <AlertTriangle size={13} strokeWidth={2} aria-hidden="true" />
+            Personnalités qui en ont besoin
           </div>
           {needyPersonalities.map(p => (
             <div
@@ -166,8 +171,9 @@ export default function Mentoring() {
 
         {/* Right: meilleurs mentors */}
         <div style={{ background: '#161b22', border: '1px solid #3fb95033', borderRadius: 10, padding: 14 }}>
-          <div style={{ fontWeight: 700, fontSize: 12, color: '#3fb950', marginBottom: 10 }}>
-            ✅ Meilleurs mentors
+          <div style={{ fontWeight: 700, fontSize: 12, color: '#3fb950', marginBottom: 10, display: 'flex', alignItems: 'center', gap: 6 }}>
+            <CircleCheck size={13} strokeWidth={2} aria-hidden="true" />
+            Meilleurs mentors
           </div>
           {suggestedMentors.map((p, i) => {
             const val = avgAttr(p, need.needAttr)
@@ -230,7 +236,10 @@ export default function Mentoring() {
 
       {/* Conseil */}
       <div style={{ background: '#0c1a3a', border: '1px solid #1e40af44', borderRadius: 8, padding: '10px 14px' }}>
-        <span style={{ fontSize: 11, color: '#58a6ff', fontWeight: 700 }}>💡 Conseil pour {need.label} : </span>
+        <span style={{ fontSize: 11, color: '#58a6ff', fontWeight: 700 }}>
+          <Lightbulb size={12} strokeWidth={2} aria-hidden="true" style={{ verticalAlign: '-2px', marginRight: 4 }} />
+          Conseil pour {need.label} :{' '}
+        </span>
         <span style={{ fontSize: 11, color: '#93c5fd' }}>{need.advice}</span>
       </div>
     </div>
