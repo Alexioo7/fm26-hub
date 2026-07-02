@@ -1,9 +1,11 @@
 import { MEDIA_STYLES } from '../../data/mediaStyles'
+import Tooltip from './Tooltip'
 
 export default function MediaTag({ name }) {
   const ms = MEDIA_STYLES.find(s => s.name === name)
   const isGood = ms && (ms.grade === 'S' || ms.grade === 'A')
-  return (
+
+  const tag = (
     <span style={{
       display: 'inline-block',
       background: isGood ? `${ms.color}18` : '#21262d',
@@ -15,7 +17,24 @@ export default function MediaTag({ name }) {
       margin: 1,
       fontWeight: isGood ? 600 : 400,
     }}>
-      {name}
+      {ms?.label ?? name}
     </span>
+  )
+
+  if (!ms) return tag
+
+  return (
+    <Tooltip
+      width={230}
+      content={
+        <>
+          <span style={{ fontWeight: 700, color: ms.color }}>{ms.label} — Grade {ms.grade}</span>
+          <br />
+          {ms.desc}
+        </>
+      }
+    >
+      {tag}
+    </Tooltip>
   )
 }

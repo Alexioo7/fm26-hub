@@ -15,7 +15,7 @@ const PROFILES = [
     id: 'pressure',
     icon: '💎',
     label: 'Gros matchs',
-    desc: 'Joueurs qui performent sous pression — finales, derbies, champions league',
+    desc: 'Joueurs qui performent sous pression — finales, derbies, Ligue des Champions',
     filter: p => p.pres >= 72,
     sortKey: 'pres',
     tip: 'Priorité : Pression et Gros Matchs garantis élevés. Style Imperturbable = Pression 15+ garanti.',
@@ -30,7 +30,7 @@ const PROFILES = [
       return leadAvg >= 15
     },
     sortKey: 'dev',
-    tip: 'Leadership 15+ en moyenne. Born Leader et Charismatic Leader = les deux uniques avec Leadership 19-20 garanti.',
+    tip: 'Leadership 15+ en moyenne. Leader Né et Leader Charismatique = les deux seuls avec Leadership 19-20 garanti.',
   },
   {
     id: 'avoid',

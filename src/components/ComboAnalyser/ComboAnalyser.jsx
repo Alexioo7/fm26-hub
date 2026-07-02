@@ -1,6 +1,7 @@
 import { useState, useMemo } from 'react'
 import { PERSONALITIES, ATTRS, TIER_CONFIG, MEDIA_RANGES } from '../../data/personalities'
-import { MEDIA_STYLES } from '../../data/mediaStyles'
+import { MEDIA_STYLES, mediaLabel } from '../../data/mediaStyles'
+import Tooltip from '../ui/Tooltip'
 
 const MEDIA_NAMES = Object.keys(MEDIA_RANGES)
 
@@ -99,14 +100,15 @@ function GradeBadge({ grade, size = 'md' }) {
   )
 }
 
-function AttrRow({ attrKey, label, icon, range }) {
+function AttrRow({ attrKey, label, icon, info, range }) {
   const color = getAttrColor(range)
-  const bg = getAttrBg(range)
   const pct = range ? Math.round((midpoint(range) / 20) * 100) : 0
   return (
     <div style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '5px 0', borderBottom: '1px solid #21262d33' }}>
-      <span style={{ fontSize: 14, width: 20, textAlign: 'center' }}>{icon}</span>
-      <span style={{ fontSize: 11, color: '#7d8590', flex: 1 }}>{label}</span>
+      <span style={{ fontSize: 14, width: 20, textAlign: 'center' }} aria-hidden="true">{icon}</span>
+      <span style={{ fontSize: 11, color: '#7d8590', flex: 1 }}>
+        <Tooltip content={info}><span className="has-tip">{label}</span></Tooltip>
+      </span>
       {range ? (
         <>
           <span style={{ fontSize: 10, color, fontWeight: 700, minWidth: 56, textAlign: 'right' }}>
@@ -191,7 +193,7 @@ export default function ComboAnalyser() {
     <div style={{ maxWidth: 560, margin: '0 auto' }}>
       <div style={{ background: '#161b22', border: '1px solid #21262d', borderRadius: 12, padding: 20, marginBottom: 12 }}>
         <h2 style={{ margin: '0 0 16px', fontSize: 15, fontWeight: 700, color: '#e8b84b' }}>
-          🔬 Combo Analyser
+          🔬 Analyseur de combo
         </h2>
 
         {/* Inputs */}
@@ -223,7 +225,7 @@ export default function ComboAnalyser() {
             >
               <option value="">— Choisir —</option>
               {MEDIA_STYLES.map(m => (
-                <option key={m.name} value={m.name}>{m.name} ({m.grade})</option>
+                <option key={m.name} value={m.name}>{m.label} ({m.grade})</option>
               ))}
             </select>
           </div>
@@ -254,10 +256,10 @@ export default function ComboAnalyser() {
           <div style={{ background: '#2d080888', border: '1px solid #f8514944', borderRadius: 8, padding: '10px 14px', marginBottom: 12 }}>
             <span style={{ color: '#f85149', fontWeight: 700, fontSize: 12 }}>⚠ Style incompatible</span>
             <div style={{ fontSize: 11, color: '#7d8590', marginTop: 4 }}>
-              {personality.name} n'est pas disponible avec le style {mediaName}.
+              {personality.name} n'est pas disponible avec le style {mediaLabel(mediaName)}.
             </div>
             <div style={{ fontSize: 11, color: '#e8b84b', marginTop: 4 }}>
-              Styles disponibles : {personality.media.join(', ')}
+              Styles disponibles : {personality.media.map(mediaLabel).join(', ')}
             </div>
           </div>
         )}
@@ -266,7 +268,7 @@ export default function ComboAnalyser() {
         {personality && !mediaName && (
           <div style={{ background: '#0c1a3a', border: '1px solid #58a6ff33', borderRadius: 8, padding: '8px 12px', marginBottom: 12 }}>
             <span style={{ fontSize: 11, color: '#58a6ff' }}>Styles disponibles : </span>
-            <span style={{ fontSize: 11, color: '#93c5fd' }}>{personality.media.join(' · ')}</span>
+            <span style={{ fontSize: 11, color: '#93c5fd' }}>{personality.media.map(mediaLabel).join(' · ')}</span>
           </div>
         )}
       </div>
@@ -332,7 +334,7 @@ export default function ComboAnalyser() {
           <div style={{ marginBottom: 12 }}>
             <div style={{ fontSize: 10, color: '#484f58', marginBottom: 6 }}>Attributs après croisement perso × style médias</div>
             {ATTRS.map(a => (
-              <AttrRow key={a.key} attrKey={a.key} label={a.label} icon={a.icon} range={combinedAttrs[a.key]} />
+              <AttrRow key={a.key} attrKey={a.key} label={a.label} icon={a.icon} info={a.info} range={combinedAttrs[a.key]} />
             ))}
           </div>
 
@@ -366,7 +368,7 @@ export default function ComboAnalyser() {
                 }}
               >
                 <span style={{ fontSize: 11, color: '#484f58', width: 16 }}>#{i + 1}</span>
-                <span style={{ fontWeight: 700, fontSize: 12, color: '#e6edf3', flex: 1 }}>{c.media}</span>
+                <span style={{ fontWeight: 700, fontSize: 12, color: '#e6edf3', flex: 1 }}>{mediaLabel(c.media)}</span>
                 <GradeBadge grade={c.grade} />
                 <span style={{ fontSize: 14, fontWeight: 800, color: cfg.color, minWidth: 32, textAlign: 'right' }}>{c.total}</span>
               </div>

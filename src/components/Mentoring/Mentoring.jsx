@@ -1,6 +1,10 @@
 import { useState } from 'react'
-import { PERSONALITIES, TIER_CONFIG } from '../../data/personalities'
+import { PERSONALITIES, ATTRS, TIER_CONFIG } from '../../data/personalities'
+import { mediaLabel } from '../../data/mediaStyles'
 import Badge from '../ui/Badge'
+import Tooltip from '../ui/Tooltip'
+
+const attrByKey = (key) => ATTRS.find(a => a.key === key)
 
 /*
   Mentoring logic in FM26:
@@ -29,7 +33,7 @@ const MENTORING_NEEDS = [
     personalities: ['easilyDiscouraged', 'lowDetermination', 'spineless', 'slack', 'casual'],
     needAttr: 'determination',
     idealMentors: ['bornLeader', 'driven', 'determined', 'ironWilled', 'perfectionist'],
-    advice: 'Mentor avec Det 18-20. Le Leader Né a Det 20 garantie. D\'Acier et Motive ont Det 18-20 garantie.',
+    advice: 'Mentor avec Dét 18-20. Le Leader Né a Dét 20 garantie. D\'Acier et Extrêmement Déterminé ont une Dét très haute garantie.',
   },
   {
     id: 'low_pres',
@@ -99,7 +103,7 @@ export default function Mentoring() {
       <div style={{ background: '#0c1a3a', border: '1px solid #1e40af44', borderRadius: 10, padding: '12px 16px', marginBottom: 14, fontSize: 11, color: '#93c5fd', lineHeight: 1.7 }}>
         <div style={{ fontWeight: 700, color: '#58a6ff', marginBottom: 4 }}>Comment fonctionne le mentoring FM26</div>
         <div>• Le mentor doit être dans le <strong>même groupe de position</strong> et avoir <strong>5+ ans de plus</strong> (ou 23+ ans)</div>
-        <div>• Le joueur mentee adopte progressivement la <strong>personnalité du mentor</strong> au fil des saisons</div>
+        <div>• Le protégé adopte progressivement la <strong>personnalité du mentor</strong> au fil des saisons</div>
         <div>• Un bon mentoring peut transformer un <span style={{ color: '#f85149' }}>Tier D</span> en <span style={{ color: '#f97316' }}>Tier C</span> viable</div>
         <div>• Le <strong>style médias du mentor</strong> amplifie l'effet — Évasif ou Réservé = meilleur transfert de Pro</div>
       </div>
@@ -111,7 +115,11 @@ export default function Mentoring() {
           return (
             <div
               key={n.id}
+              role="button"
+              tabIndex={0}
+              aria-pressed={isActive}
               onClick={() => { setActiveNeed(n.id); setMenteeId('') }}
+              onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setActiveNeed(n.id); setMenteeId('') } }}
               style={{
                 background: isActive ? '#e8b84b18' : '#161b22',
                 border: `1px solid ${isActive ? '#e8b84b88' : '#21262d'}`,
@@ -147,7 +155,7 @@ export default function Mentoring() {
               <div style={{ flex: 1 }}>
                 <div style={{ fontSize: 11, fontWeight: 600, color: '#e6edf3' }}>{p.name}</div>
                 <div style={{ fontSize: 9, color: '#7d8590' }}>
-                  {need.needAttr.charAt(0).toUpperCase() + need.needAttr.slice(1)}: {p.attrs[need.needAttr][0]}–{p.attrs[need.needAttr][1]}
+                  {attrByKey(need.needAttr).label} : {p.attrs[need.needAttr][0]}–{p.attrs[need.needAttr][1]}
                 </div>
               </div>
               <Badge tier={p.tier} />
@@ -176,8 +184,8 @@ export default function Mentoring() {
                 <div style={{ flex: 1 }}>
                   <div style={{ fontSize: 11, fontWeight: 600, color: '#e6edf3' }}>{p.name}</div>
                   <div style={{ fontSize: 9, color: '#7d8590' }}>
-                    Moy {need.needAttr.slice(0,3)} : <span style={{ color: val >= 15 ? '#3fb950' : '#e8b84b', fontWeight: 700 }}>{val}</span>
-                    <span style={{ marginLeft: 6 }}>Styles : {p.media.slice(0, 3).join(', ')}</span>
+                    Moy {attrByKey(need.needAttr).short} : <span style={{ color: val >= 15 ? '#3fb950' : '#e8b84b', fontWeight: 700 }}>{val}</span>
+                    <span style={{ marginLeft: 6 }}>Styles : {p.media.slice(0, 3).map(mediaLabel).join(', ')}</span>
                   </div>
                 </div>
                 <Badge tier={p.tier} />
@@ -206,7 +214,10 @@ export default function Mentoring() {
                   border: `1px solid ${isNeed ? '#e8b84b44' : isWeak ? '#f8514933' : '#21262d'}`,
                 }}>
                   <div style={{ fontSize: 9, color: '#484f58', marginBottom: 2 }}>
-                    {key.slice(0,3).toUpperCase()} {isNeed && '← CIBLE'}
+                    <Tooltip content={attrByKey(key).info}>
+                      <span className="has-tip">{attrByKey(key).short.toUpperCase()}</span>
+                    </Tooltip>
+                    {isNeed && ' ← CIBLE'}
                   </div>
                   <div style={{ fontSize: 13, fontWeight: 700, color: isNeed ? '#e8b84b' : isWeak ? '#f85149' : '#7d8590' }}>{avg}</div>
                   <div style={{ fontSize: 8, color: '#30363d' }}>{lo}–{hi}</div>

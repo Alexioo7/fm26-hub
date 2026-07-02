@@ -22,7 +22,11 @@ export default function MediaStyles() {
           return (
             <div
               key={m.name}
+              role="button"
+              tabIndex={0}
+              aria-pressed={isActive}
               onClick={() => setSelected(isActive ? null : m.name)}
+              onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setSelected(isActive ? null : m.name) } }}
               style={{
                 background: isActive ? `${color}18` : '#161b22',
                 border: `1px solid ${isActive ? color + '88' : '#21262d'}`,
@@ -31,7 +35,7 @@ export default function MediaStyles() {
               }}
             >
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 6 }}>
-                <span style={{ fontWeight: 700, fontSize: 12, color: '#e6edf3' }}>{m.name}</span>
+                <span style={{ fontWeight: 700, fontSize: 12, color: '#e6edf3' }}>{m.label}</span>
                 <span style={{ color, fontWeight: 800, fontSize: 11, background: `${color}22`, padding: '1px 7px', borderRadius: 4 }}>{m.grade}</span>
               </div>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: 3 }}>
@@ -48,7 +52,7 @@ export default function MediaStyles() {
       {style && (
         <div style={{ background: '#161b22', border: `1px solid ${GRADE_COLOR[style.grade]}44`, borderRadius: 12, padding: 16, marginBottom: 12 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 10 }}>
-            <span style={{ fontWeight: 800, fontSize: 15, color: '#e6edf3' }}>{style.name}</span>
+            <span style={{ fontWeight: 800, fontSize: 15, color: '#e6edf3' }}>{style.label}</span>
             <span style={{ color: GRADE_COLOR[style.grade], fontWeight: 800, fontSize: 14 }}>— {style.grade}</span>
           </div>
           <p style={{ fontSize: 12, color: '#93c5fd', margin: '0 0 12px', lineHeight: 1.6 }}>{style.desc}</p>

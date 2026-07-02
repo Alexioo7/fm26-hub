@@ -31,7 +31,11 @@ export default function Scout() {
         {MODES.map(m => (
           <div
             key={m.id}
+            role="button"
+            tabIndex={0}
+            aria-pressed={mode === m.id}
             onClick={() => setMode(m.id)}
+            onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setMode(m.id) } }}
             style={{
               background: mode === m.id ? '#e8b84b18' : '#161b22',
               border: `1px solid ${mode === m.id ? '#e8b84b88' : '#21262d'}`,

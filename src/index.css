@@ -45,3 +45,43 @@ body {
 
 .nav-scroll { scrollbar-width: none; }
 .nav-scroll::-webkit-scrollbar { display: none; }
+
+/* Accessibilité : focus clavier visible partout */
+:focus { outline: none; }
+:focus-visible {
+  outline: 2px solid #e8b84b;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+button, select, input, [role="button"] {
+  font-family: inherit;
+  touch-action: manipulation;
+}
+
+input:focus, select:focus {
+  border-color: #e8b84b88 !important;
+}
+
+/* Tooltip */
+@keyframes tooltip-in {
+  from { opacity: 0; transform: translateX(-50%) translateY(4px); }
+  to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+/* Libellé avec info au survol */
+.has-tip {
+  border-bottom: 1px dotted #484f58;
+  padding-bottom: 1px;
+}
+
+/* Tableau : surbrillance de ligne */
+.fm-table tbody tr { transition: background 0.12s; }
+.fm-table tbody tr:hover { background: #1c233355 !important; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

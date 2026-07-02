@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { PERSONALITIES, RADAR_KEYS, ATTRS, TIER_CONFIG } from '../../data/personalities'
 
-const LABELS = { professionalism: 'Pro', pressure: 'Pres', importantMatches: 'Imp', ambition: 'Amb', determination: 'Det', temperament: 'Tem' }
+const LABELS = Object.fromEntries(ATTRS.map(a => [a.key, a.short]))
 
 function RadarChart({ personality, size = 220 }) {
   const cx = size / 2
