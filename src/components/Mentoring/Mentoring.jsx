@@ -25,7 +25,7 @@ const MENTORING_NEEDS = [
     needAttr: 'professionalism',
     idealMentorAttrs: { professionalism: 18 },
     idealMentors: ['modelcitizen', 'modelPro', 'bornLeader', 'professional', 'fairlyPro', 'resolute'],
-    advice: 'Mentor avec Pro 18-20 garanti. Le Professionnel Modèle ou le Citoyen Modèle sont idéaux. Le style Évasif ou Réservé du mentor amplifie l\'effet.',
+    advice: 'Mentor avec Pro 18-20 garanti. Le Modèle de Professionnalisme ou le Citoyen Modèle sont idéaux. Le style Évasif ou Réservé du mentor amplifie l\'effet.',
   },
   {
     id: 'low_det',
@@ -35,7 +35,7 @@ const MENTORING_NEEDS = [
     personalities: ['easilyDiscouraged', 'lowDetermination', 'spineless', 'slack', 'casual'],
     needAttr: 'determination',
     idealMentors: ['bornLeader', 'driven', 'determined', 'ironWilled', 'perfectionist'],
-    advice: 'Mentor avec Dét 18-20. Le Leader Né a Dét 20 garantie. D\'Acier et Extrêmement Déterminé ont une Dét très haute garantie.',
+    advice: 'Mentor avec Dét 18-20. Le Leader Né a Dét 20 garantie. Effronté et Motivé ont une Dét très haute garantie.',
   },
   {
     id: 'low_pres',
@@ -45,7 +45,7 @@ const MENTORING_NEEDS = [
     personalities: ['spineless', 'lowSelfBelief', 'easilyDiscouraged'],
     needAttr: 'pressure',
     idealMentors: ['ironWilled', 'modelcitizen', 'resilient', 'spirited', 'lightHearted', 'jovial'],
-    advice: 'Mentor avec Pression garantie élevée. D\'Acier a Pression 20 absolue — le meilleur mentor pour ce profil. Style Imperturbable du mentor garantit Pression 15+.',
+    advice: 'Mentor avec Pression garantie élevée. Effronté a Pression 20 absolue — le meilleur mentor pour ce profil. Style Imperturbable du mentor garantit Pression 15+.',
   },
   {
     id: 'low_tem',

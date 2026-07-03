@@ -82,8 +82,8 @@ export default function MediaStyles() {
         <div>• <strong style={{ color: '#e8b84b' }}>Évasif</strong> = Pro 15+ ET Pression 15+ garantis → transforme n'importe quelle personnalité</div>
         <div>• <strong style={{ color: '#3fb950' }}>Réservé</strong> = Pro 15+ garanti → Pression plafonnée à 14</div>
         <div>• <strong style={{ color: '#3fb950' }}>Imperturbable</strong> = Pression 15+ garanti → Tempérament 15+ aussi</div>
-        <div>• <strong style={{ color: '#f85149' }}>Direct</strong> = Pression et Gros Matchs très bas garantis → éviter</div>
-        <div>• <strong style={{ color: '#f85149' }}>Court-feu / Volatile</strong> = Tempérament minimal garanti → éviter</div>
+        <div>• <strong style={{ color: '#f85149' }}>Spontané</strong> = Pression et Gros Matchs très bas garantis → éviter</div>
+        <div>• <strong style={{ color: '#f85149' }}>Irascible / Versatile</strong> = Tempérament minimal garanti → éviter</div>
       </div>
     </div>
   )

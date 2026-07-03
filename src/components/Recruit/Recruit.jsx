@@ -57,8 +57,8 @@ export default function Recruit() {
             { name: 'Friable', reason: 'Pression 1 garanti = fantôme en match' },
             { name: 'Indolent / Occasionnel', reason: 'Pro 1 garanti = ne développera jamais' },
             { name: 'En manque de confiance', reason: 'Pression 2-3 garanti' },
-            { name: 'Style Direct', reason: 'Pression et Gros Matchs très bas garantis' },
-            { name: 'Style Court-feu / Volatile', reason: 'Tempérament minimal garanti = cartons et suspensions' },
+            { name: 'Style Spontané', reason: 'Pression et Gros Matchs très bas garantis' },
+            { name: 'Style Irascible / Versatile', reason: 'Tempérament minimal garanti = cartons et suspensions' },
           ].map(rf => (
             <div key={rf.name} style={{ display: 'flex', gap: 8, fontSize: 11 }}>
               <span style={{ color: '#f85149', flexShrink: 0 }}>•</span>
