@@ -130,13 +130,13 @@ export const PERSONALITIES = [
     weaknesses:["Seul style Réservé disponible","2 joueurs dans toute la DB"],
     tip:"Profil très propre. Extrêmement rare.", dev:82, pres:55 },
 
-  { id:"resolute", name:"Déterminé", enName:"Resolute", tier:"A", emoji:"⚡",
+  { id:"resolute", name:"Ferme", enName:"Resolute", tier:"A", emoji:"⚡",
     media:["Evasif","Reserve","Confrontant","Pose","Amical","Direct","Court-feu","Volatile"],
     attrs:{ professionalism:[15,20], pressure:[1,16], importantMatches:[1,20], ambition:[1,20], determination:[15,17], temperament:[1,20], sportsmanship:[1,20], loyalty:[1,20], leadership:[1,19], injuryProneness:[3,9] },
     avg:{ professionalism:16, pressure:11, importantMatches:11, ambition:12, determination:16, temperament:13, sportsmanship:12, loyalty:12, leadership:10 },
     strengths:["Pro 15-20 garanti","Détermination 15-17 garantie","Très commun","Évasif disponible"],
     weaknesses:["Pression plafonnée à 16","Style Imperturbable indisponible"],
-    tip:"Confirmé FR = Déterminé (homonyme avec la perso Determined). Avec Évasif = Pro + Pression 15+ garantis.", dev:82, pres:65 },
+    tip:"Confirmé FR = Ferme. Avec Évasif = Pro + Pression 15+ garantis.", dev:82, pres:65 },
 
   { id:"professional", name:"Professionnel", enName:"Professional", tier:"A", emoji:"💼",
     media:["Evasif","Reserve","Imperturbable","Pose","Amical","Direct"],
@@ -290,7 +290,7 @@ export const PERSONALITIES = [
     avg:{ professionalism:12, pressure:12, importantMatches:10, ambition:10, determination:18, temperament:13, sportsmanship:11, loyalty:11, leadership:9 },
     strengths:["Détermination 18-20 garantie","Tous les styles disponibles"],
     weaknesses:["Ambition plafonnée à 11","Pro et Pression très variables"],
-    tip:"Détermination maximale garantie. Homonyme FR avec Resolute (même nom Déterminé). Avec Évasif = Pro + Pression 15+ en plus.", dev:68, pres:65 },
+    tip:"Détermination maximale garantie. Avec Évasif = Pro + Pression 15+ en plus.", dev:68, pres:65 },
 
   { id:"fairlyDetermined", name:"Assez Déterminé", enName:"Fairly Determined", tier:"C", emoji:"🎖️",
     media:["Confrontant","Pose","Amical","Direct","Court-feu","Volatile"],
